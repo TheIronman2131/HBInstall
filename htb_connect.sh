@@ -58,16 +58,16 @@ echo "You may be prompted for an admin password"
 
 sudo openvpn --config "$OVPN_FILE" --daemon
 echo "Waiting 5 seconds for the VPN to negotiate connection..."
-sleep 5
+sleep 8
 
-HTB_IP=$(ifconfig tun0 2>/dev/null | grep 'inet ' | awk '{print $2}')
+HTB_IP=$(ifconfig | grep 'inet 10.10.' | awk '{print $2}')
 
 if [ -z "$HTB_IP" ]; then
     echo "Connection failed"
 else
     echo "==================================================="
     echo "[+] SUCCESS! You are connected to the HTB network."
-    echo "[+] Your HTB IP (tun0) is: $HTB_IP"
+    echo "[+] Your HTB IP is: $HTB_IP"
     echo "==================================================="
 fi
 
